@@ -172,9 +172,9 @@ pre code {
 
 <div id="comparing-aar-tables" class="section level2">
 <h2>Comparing AAR tables:</h2>
-<p>Determining if we can rely on the AZURE TPEP trip data table to count AAR trips using the AAR flag column instead of having a separate EHAIL table.</p>
-<p>Starting by creating two pulls: 1) All AAR trips on 11/01/2021 using the EHAIL table and 2) All trips on 11/01/2021 from the yellows TPEP table where the AAR flag column is NA. An important note is that within the TPEP table, the AAR_Request column has three possible values: 0, 1, and Null. It is unclear what 0 and 1 mean, but when AAR_Request is Null, the resulting trips appear to match the trips from the EHAIL table. The following process confirms if those trips are matched perfectly.</p>
-<p>Data from the EHAIL pull:</p>
+<p>Determining if we can rely on the Yellows TPEP trip data table to count AAR trips using the AAR flag column instead of having a separate EHAIL Flex Fare table.</p>
+<p>Starting by creating two pulls: 1) All AAR trips on 11/01/2021 using the EHAIL FF table and 2) All trips on 11/01/2021 from the Yellows TPEP table where the AAR flag column is NA.</p>
+<p>Results from the EHAIL FF pull:</p>
 <div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:300px; overflow-x: scroll; width:100%; ">
 <table class="table table-striped table-hover table-condensed" style="margin-left: auto; margin-right: auto;">
 <caption>
@@ -756,11 +756,1745 @@ NA
 </tbody>
 </table>
 </div>
-<p>Data from the TPEP pull:</p>
+<p>An important note is that within the Yellows TPEP table, the AAR_Request column has three possible values: 0, 1, and Null.</p>
+<p>When AAR_Request is 0, the result is a total of 101,449 trips. Here is a snapshot of those trips:</p>
 <div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:300px; overflow-x: scroll; width:100%; ">
 <table class="table table-striped table-hover table-condensed" style="margin-left: auto; margin-right: auto;">
 <caption>
-EHAIL Table
+AAR Request is 0
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+tpep_pickup_datetime
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+medallion
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+Hack_number
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+tpep_dropoff_datetime
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+taximeter_pickup_datetime
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+taximeter_pickup_mileage
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+taximeter_pickup_fare_mileage
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+taximeter_dropoff_datetime
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+taximeter_dropoff_mileage
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+taximeter_dropoff_fare_mileage
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+VendorID
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+DateTimeID
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+shift_number
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+taximeter_shift_start_datetime
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+taximeter_shift_end_datetime
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+trip_number
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+store_and_fwd_flag
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+RateCodeID
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+PULocationID
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+DOLocationID
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+pickup_longitude
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+pickup_latitude
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+pickup_location_name
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+dropoff_longitude
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+dropoff_latitude
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+dropoff_location_name
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+passenger_count
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+trip_time_in_secs
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+trip_distance
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+fare_amount
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+extra
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+mta_tax
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+tip_amount
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+tolls_amount
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+ehail_fee
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+total_amount
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+payment_type
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+cc_brand
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+cc_number
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+ehail_id
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+ehail_account_id
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+distance_between_service
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+time_between_service
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+improvement_surcharge
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+congestion_surcharge
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+AAR_Request
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+airport_fee
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+2021-11-01 00:34:15
+</td>
+<td style="text-align:left;">
+4P86
+</td>
+<td style="text-align:right;">
+48881
+</td>
+<td style="text-align:left;">
+2021-11-01 00:57:21
+</td>
+<td style="text-align:left;">
+2021-11-01 00:38:00
+</td>
+<td style="text-align:right;">
+25282.9
+</td>
+<td style="text-align:right;">
+10355.3
+</td>
+<td style="text-align:left;">
+2021-11-01 01:01:00
+</td>
+<td style="text-align:right;">
+25289.6
+</td>
+<td style="text-align:right;">
+10362.1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2021110100
+</td>
+<td style="text-align:right;">
+189362952
+</td>
+<td style="text-align:left;">
+2021-11-01 00:16:12
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+376
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+137
+</td>
+<td style="text-align:right;">
+264
+</td>
+<td style="text-align:right;">
+-73.97557
+</td>
+<td style="text-align:right;">
+40.74091
+</td>
+<td style="text-align:left;">
+503 1st Ave New York Ny 10016
+</td>
+<td style="text-align:right;">
+0.00000
+</td>
+<td style="text-align:right;">
+0.00000
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1385
+</td>
+<td style="text-align:right;">
+7.0
+</td>
+<td style="text-align:right;">
+22.5
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+0.5
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+26.30
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+1548
+</td>
+<td style="text-align:right;">
+0.3
+</td>
+<td style="text-align:right;">
+2.5
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2021-11-01 00:00:29
+</td>
+<td style="text-align:left;">
+1N85
+</td>
+<td style="text-align:right;">
+265616
+</td>
+<td style="text-align:left;">
+2021-11-01 00:14:13
+</td>
+<td style="text-align:left;">
+2021-11-01 00:09:00
+</td>
+<td style="text-align:right;">
+23398.5
+</td>
+<td style="text-align:right;">
+10623.7
+</td>
+<td style="text-align:left;">
+2021-11-01 00:22:00
+</td>
+<td style="text-align:right;">
+23401.6
+</td>
+<td style="text-align:right;">
+10626.8
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2021110100
+</td>
+<td style="text-align:right;">
+189354839
+</td>
+<td style="text-align:left;">
+2021-10-31 18:00:13
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3217
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+233
+</td>
+<td style="text-align:right;">
+232
+</td>
+<td style="text-align:right;">
+-73.96950
+</td>
+<td style="text-align:right;">
+40.75370
+</td>
+<td style="text-align:left;">
+290 E 48th St New York Ny 10017
+</td>
+<td style="text-align:right;">
+-73.98521
+</td>
+<td style="text-align:right;">
+40.71545
+</td>
+<td style="text-align:left;">
+437 Grand St New York Ny 10002
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+824
+</td>
+<td style="text-align:right;">
+3.2
+</td>
+<td style="text-align:right;">
+12.5
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+0.5
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+16.30
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+7
+</td>
+<td style="text-align:left;">
+4207672065
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+12491
+</td>
+<td style="text-align:right;">
+0.3
+</td>
+<td style="text-align:right;">
+2.5
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2021-11-01 00:27:51
+</td>
+<td style="text-align:left;">
+1N85
+</td>
+<td style="text-align:right;">
+265616
+</td>
+<td style="text-align:left;">
+2021-11-01 00:34:21
+</td>
+<td style="text-align:left;">
+2021-11-01 00:36:00
+</td>
+<td style="text-align:right;">
+23403.0
+</td>
+<td style="text-align:right;">
+10627.0
+</td>
+<td style="text-align:left;">
+2021-11-01 00:43:00
+</td>
+<td style="text-align:right;">
+23404.8
+</td>
+<td style="text-align:right;">
+10628.7
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2021110100
+</td>
+<td style="text-align:right;">
+189354839
+</td>
+<td style="text-align:left;">
+2021-10-31 18:00:13
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3218
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+79
+</td>
+<td style="text-align:right;">
+170
+</td>
+<td style="text-align:right;">
+-73.98428
+</td>
+<td style="text-align:right;">
+40.72887
+</td>
+<td style="text-align:left;">
+167 1st Ave New York Ny 10003
+</td>
+<td style="text-align:right;">
+-73.97768
+</td>
+<td style="text-align:right;">
+40.74910
+</td>
+<td style="text-align:left;">
+320 Lexington Ave New York Ny 10016
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+390
+</td>
+<td style="text-align:right;">
+1.8
+</td>
+<td style="text-align:right;">
+7.0
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+0.5
+</td>
+<td style="text-align:right;">
+2.15
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+12.95
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+3703825861
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+817
+</td>
+<td style="text-align:right;">
+0.3
+</td>
+<td style="text-align:right;">
+2.5
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2021-11-01 00:01:56
+</td>
+<td style="text-align:left;">
+4D77
+</td>
+<td style="text-align:right;">
+297071
+</td>
+<td style="text-align:left;">
+2021-11-01 00:25:18
+</td>
+<td style="text-align:left;">
+2021-11-01 00:06:00
+</td>
+<td style="text-align:right;">
+70450.9
+</td>
+<td style="text-align:right;">
+29939.8
+</td>
+<td style="text-align:left;">
+2021-11-01 00:30:00
+</td>
+<td style="text-align:right;">
+70455.5
+</td>
+<td style="text-align:right;">
+29944.4
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2021110100
+</td>
+<td style="text-align:right;">
+189358315
+</td>
+<td style="text-align:left;">
+2021-10-31 20:18:58
+</td>
+<td style="text-align:left;">
+2021-11-01 00:31:23
+</td>
+<td style="text-align:right;">
+50
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+230
+</td>
+<td style="text-align:right;">
+42
+</td>
+<td style="text-align:right;">
+-73.98817
+</td>
+<td style="text-align:right;">
+40.75918
+</td>
+<td style="text-align:left;">
+290 W 45th St New York Ny 10036
+</td>
+<td style="text-align:right;">
+-73.94437
+</td>
+<td style="text-align:right;">
+40.81303
+</td>
+<td style="text-align:left;">
+170 W 132nd St New York Ny 10027
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1402
+</td>
+<td style="text-align:right;">
+4.7
+</td>
+<td style="text-align:right;">
+19.0
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+0.5
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+22.80
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+3332
+</td>
+<td style="text-align:right;">
+0.3
+</td>
+<td style="text-align:right;">
+2.5
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2021-11-01 00:10:44
+</td>
+<td style="text-align:left;">
+4A86
+</td>
+<td style="text-align:right;">
+337633
+</td>
+<td style="text-align:left;">
+2021-11-01 00:29:06
+</td>
+<td style="text-align:left;">
+2021-10-31 23:49:00
+</td>
+<td style="text-align:right;">
+5940.7
+</td>
+<td style="text-align:right;">
+2704.1
+</td>
+<td style="text-align:left;">
+2021-11-01 00:08:00
+</td>
+<td style="text-align:right;">
+5944.1
+</td>
+<td style="text-align:right;">
+2707.5
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2021110100
+</td>
+<td style="text-align:right;">
+189358990
+</td>
+<td style="text-align:left;">
+2021-10-31 21:00:37
+</td>
+<td style="text-align:left;">
+2021-11-01 00:58:52
+</td>
+<td style="text-align:right;">
+484
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+144
+</td>
+<td style="text-align:right;">
+50
+</td>
+<td style="text-align:right;">
+-73.99707
+</td>
+<td style="text-align:right;">
+40.72506
+</td>
+<td style="text-align:left;">
+600 Broadway New York Ny 10012
+</td>
+<td style="text-align:right;">
+-73.99799
+</td>
+<td style="text-align:right;">
+40.76406
+</td>
+<td style="text-align:left;">
+670 W 46th St New York Ny 10036
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1102
+</td>
+<td style="text-align:right;">
+3.5
+</td>
+<td style="text-align:right;">
+15.0
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+0.5
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+18.80
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+7
+</td>
+<td style="text-align:left;">
+4117766897
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+397
+</td>
+<td style="text-align:right;">
+0.3
+</td>
+<td style="text-align:right;">
+2.5
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>When AAR_Request is 1, the result is a total of 308 trips. Here is a snapshot of those trips:</p>
+<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:300px; overflow-x: scroll; width:100%; ">
+<table class="table table-striped table-hover table-condensed" style="margin-left: auto; margin-right: auto;">
+<caption>
+AAR Request is 1
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+tpep_pickup_datetime
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+medallion
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+Hack_number
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+tpep_dropoff_datetime
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+taximeter_pickup_datetime
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+taximeter_pickup_mileage
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+taximeter_pickup_fare_mileage
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+taximeter_dropoff_datetime
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+taximeter_dropoff_mileage
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+taximeter_dropoff_fare_mileage
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+VendorID
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+DateTimeID
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+shift_number
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+taximeter_shift_start_datetime
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+taximeter_shift_end_datetime
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+trip_number
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+store_and_fwd_flag
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+RateCodeID
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+PULocationID
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+DOLocationID
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+pickup_longitude
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+pickup_latitude
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+pickup_location_name
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+dropoff_longitude
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+dropoff_latitude
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+dropoff_location_name
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+passenger_count
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+trip_time_in_secs
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+trip_distance
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+fare_amount
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+extra
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+mta_tax
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+tip_amount
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+tolls_amount
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+ehail_fee
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+total_amount
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+payment_type
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+cc_brand
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+cc_number
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+ehail_id
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+ehail_account_id
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+distance_between_service
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+time_between_service
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+improvement_surcharge
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+congestion_surcharge
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+AAR_Request
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+airport_fee
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+2021-11-01 03:59:17
+</td>
+<td style="text-align:left;">
+9D70
+</td>
+<td style="text-align:right;">
+5414255
+</td>
+<td style="text-align:left;">
+2021-11-01 04:45:42
+</td>
+<td style="text-align:left;">
+2021-11-01 03:59:17
+</td>
+<td style="text-align:right;">
+216452.01
+</td>
+<td style="text-align:right;">
+165187.50
+</td>
+<td style="text-align:left;">
+2021-11-01 04:45:42
+</td>
+<td style="text-align:right;">
+216499.02
+</td>
+<td style="text-align:right;">
+165234.51
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+2021110103
+</td>
+<td style="text-align:right;">
+433212740
+</td>
+<td style="text-align:left;">
+2021-11-01 03:42:32
+</td>
+<td style="text-align:left;">
+2021-11-01 06:00:21
+</td>
+<td style="text-align:right;">
+10120
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+64
+</td>
+<td style="text-align:right;">
+44
+</td>
+<td style="text-align:right;">
+-73.72351
+</td>
+<td style="text-align:right;">
+40.75537
+</td>
+<td style="text-align:left;">
+6389 254th St Little Neck New York 11362
+</td>
+<td style="text-align:right;">
+-74.25324
+</td>
+<td style="text-align:right;">
+40.50850
+</td>
+<td style="text-align:left;">
+136 Hopping Ave Staten Island New York 10307
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2785
+</td>
+<td style="text-align:right;">
+47.01
+</td>
+<td style="text-align:right;">
+120.5
+</td>
+<td style="text-align:right;">
+0.5
+</td>
+<td style="text-align:right;">
+0.5
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+6.55
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+128.35
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+XX0001
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+31
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.3
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2021-11-01 04:56:20
+</td>
+<td style="text-align:left;">
+4F50
+</td>
+<td style="text-align:right;">
+442414
+</td>
+<td style="text-align:left;">
+2021-11-01 04:59:55
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2021110104
+</td>
+<td style="text-align:right;">
+189361117
+</td>
+<td style="text-align:left;">
+2021-11-01 04:43:08
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+282
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+191
+</td>
+<td style="text-align:right;">
+19
+</td>
+<td style="text-align:right;">
+-73.73930
+</td>
+<td style="text-align:right;">
+40.72494
+</td>
+<td style="text-align:left;">
+9170 Springfield Blvd Queens Ny 11428
+</td>
+<td style="text-align:right;">
+-73.74274
+</td>
+<td style="text-align:right;">
+40.73035
+</td>
+<td style="text-align:left;">
+22060 Braddock Ave Queens Ny 11427
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+215
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+15.2
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+0.5
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+16.00
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.3
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2021-11-01 04:20:29
+</td>
+<td style="text-align:left;">
+1F49
+</td>
+<td style="text-align:right;">
+5097321
+</td>
+<td style="text-align:left;">
+2021-11-01 04:51:24
+</td>
+<td style="text-align:left;">
+2021-11-01 04:20:29
+</td>
+<td style="text-align:right;">
+176345.40
+</td>
+<td style="text-align:right;">
+89236.38
+</td>
+<td style="text-align:left;">
+2021-11-01 04:51:24
+</td>
+<td style="text-align:right;">
+176363.17
+</td>
+<td style="text-align:right;">
+89254.16
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+2021110104
+</td>
+<td style="text-align:right;">
+433212810
+</td>
+<td style="text-align:left;">
+2021-11-01 03:56:37
+</td>
+<td style="text-align:left;">
+2021-11-01 13:55:35
+</td>
+<td style="text-align:right;">
+11498
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+135
+</td>
+<td style="text-align:right;">
+68
+</td>
+<td style="text-align:right;">
+-73.81864
+</td>
+<td style="text-align:right;">
+40.72038
+</td>
+<td style="text-align:left;">
+7770 Main St Flushing New York 11367
+</td>
+<td style="text-align:right;">
+-73.99747
+</td>
+<td style="text-align:right;">
+40.74686
+</td>
+<td style="text-align:left;">
+309 8th Ave New York New York 10001
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1855
+</td>
+<td style="text-align:right;">
+17.77
+</td>
+<td style="text-align:right;">
+49.5
+</td>
+<td style="text-align:right;">
+0.5
+</td>
+<td style="text-align:right;">
+0.5
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+6.55
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+57.35
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+XX0001
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+43
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.3
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2021-11-01 04:30:15
+</td>
+<td style="text-align:left;">
+8P12
+</td>
+<td style="text-align:right;">
+5349315
+</td>
+<td style="text-align:left;">
+2021-11-01 05:28:45
+</td>
+<td style="text-align:left;">
+2021-11-01 04:30:15
+</td>
+<td style="text-align:right;">
+3931.38
+</td>
+<td style="text-align:right;">
+1982.00
+</td>
+<td style="text-align:left;">
+2021-11-01 05:28:45
+</td>
+<td style="text-align:right;">
+3948.55
+</td>
+<td style="text-align:right;">
+1999.16
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+2021110104
+</td>
+<td style="text-align:right;">
+433212816
+</td>
+<td style="text-align:left;">
+2021-11-01 03:57:13
+</td>
+<td style="text-align:left;">
+2021-11-01 19:52:19
+</td>
+<td style="text-align:right;">
+248
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+74
+</td>
+<td style="text-align:right;">
+132
+</td>
+<td style="text-align:right;">
+-73.93245
+</td>
+<td style="text-align:right;">
+40.79991
+</td>
+<td style="text-align:left;">
+2420 1st Ave New York New York 10035
+</td>
+<td style="text-align:right;">
+-73.77645
+</td>
+<td style="text-align:right;">
+40.64634
+</td>
+<td style="text-align:left;">
+JFK Airport, NY
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+3510
+</td>
+<td style="text-align:right;">
+17.18
+</td>
+<td style="text-align:right;">
+64.0
+</td>
+<td style="text-align:right;">
+0.5
+</td>
+<td style="text-align:right;">
+0.5
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+6.55
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+73.10
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+XX0001
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+22
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.3
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1.25
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2021-11-01 04:47:39
+</td>
+<td style="text-align:left;">
+9D70
+</td>
+<td style="text-align:right;">
+5414255
+</td>
+<td style="text-align:left;">
+2021-11-01 05:56:26
+</td>
+<td style="text-align:left;">
+2021-11-01 04:47:39
+</td>
+<td style="text-align:right;">
+216499.02
+</td>
+<td style="text-align:right;">
+165234.51
+</td>
+<td style="text-align:left;">
+2021-11-01 05:56:26
+</td>
+<td style="text-align:right;">
+216547.23
+</td>
+<td style="text-align:right;">
+165282.72
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+2021110104
+</td>
+<td style="text-align:right;">
+433212740
+</td>
+<td style="text-align:left;">
+2021-11-01 03:42:32
+</td>
+<td style="text-align:left;">
+2021-11-01 06:00:21
+</td>
+<td style="text-align:right;">
+10121
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+44
+</td>
+<td style="text-align:right;">
+101
+</td>
+<td style="text-align:right;">
+-74.25324
+</td>
+<td style="text-align:right;">
+40.50850
+</td>
+<td style="text-align:left;">
+136 Hopping Ave Staten Island New York 10307
+</td>
+<td style="text-align:right;">
+-73.70394
+</td>
+<td style="text-align:right;">
+40.75354
+</td>
+<td style="text-align:left;">
+7686 Hewlett St New Hyde Park New York 11040
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+4127
+</td>
+<td style="text-align:right;">
+48.21
+</td>
+<td style="text-align:right;">
+130.5
+</td>
+<td style="text-align:right;">
+0.5
+</td>
+<td style="text-align:right;">
+0.5
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+6.55
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+138.35
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+O
+</td>
+<td style="text-align:left;">
+XX0001
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+117
+</td>
+<td style="text-align:right;">
+0.3
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>When AAR_Request is NULL, the result is a total of 4758 trips. Here is a snapshot of those trips:</p>
+<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:300px; overflow-x: scroll; width:100%; ">
+<table class="table table-striped table-hover table-condensed" style="margin-left: auto; margin-right: auto;">
+<caption>
+AAR Request is NULL
 </caption>
 <thead>
 <tr>
@@ -1626,114 +3360,116 @@ NA
 </tbody>
 </table>
 </div>
+<p>It is unclear what 0 and 1 mean, but when AAR_Request is NULL, the resulting trips appear to match the trips from the EHAIL FF table. The following process confirms if those trips are matched perfectly.</p>
 <p>To confirm whether the tables match, the best method is to identify if there are any outlier trips in either of the datasets. The initial impression is that there is not because each pull produced the same number of observations:</p>
-<p>Number of observations in EHAIL pull:</p>
+<p>Number of observations in EHAIL FF pull:</p>
 <pre class="r"><code>nrow(aar_trips_day)</code></pre>
 <pre><code>## [1] 4758</code></pre>
 <p>Number of observations in TPEP pull:</p>
 <pre class="r"><code>nrow(yellow_aar_trips_day)</code></pre>
 <pre><code>## [1] 4758</code></pre>
-<p>To confirm the initial hypothesis, we can do first do a broad comparison of the resulting pulls to idenfity any rows that are only in one pull and not the other. We can then on a micro-level analyze whether any specific column has differing values from another. This is best done by creating a list of the values in each column and then comparing whether there are any values that exist in one list and not the other. If the resulting list is empty, we can deduce that there are no values present in one data pull and not the other.</p>
-<p>A broad comparison of the two dataframes using the r package dplyr and the function anti_join produces an empty dataframe. This means each row in the EHail pull is present in the TPEP pull.</p>
+<p>To explore further, we can do first do a broad comparison of the resulting pulls to idenfity any rows that are only in one pull and not the other. We can then on a micro-level analyze whether any specific column has differing values from another. This is best done by creating a list of the values in each column and then comparing whether there are any values that exist in one list and not the other. If the resulting list is empty, we can deduce that there are no values present in one data pull and not the other.</p>
+<p>A broad comparison of the two dataframes using the r package dplyr and the function anti_join produces an empty dataframe. This means each row in the EHail FF pull is present in the TPEP pull.</p>
+<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:110px; overflow-x: scroll; width:100%; ">
 <table class="table table-striped table-hover table-condensed" style="margin-left: auto; margin-right: auto;">
 <caption>
 EHAIL Table
 </caption>
 <thead>
 <tr>
-<th style="text-align:left;">
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
 </th>
-<th style="text-align:left;">
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
 ehail_id
 </th>
-<th style="text-align:left;">
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
 pickup_datetime
 </th>
-<th style="text-align:left;">
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
 shift_start_datetime
 </th>
-<th style="text-align:left;">
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
 shift_end_datetime
 </th>
-<th style="text-align:left;">
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
 medallion
 </th>
-<th style="text-align:right;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
 hack_number
 </th>
-<th style="text-align:left;">
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
 dropoff_datetime
 </th>
-<th style="text-align:right;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
 trip_time_in_sec
 </th>
-<th style="text-align:right;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
 trip_distance
 </th>
-<th style="text-align:right;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
 fare_amount
 </th>
-<th style="text-align:right;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
 extra
 </th>
-<th style="text-align:right;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
 mta_tax
 </th>
-<th style="text-align:right;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
 improvement_surcharge
 </th>
-<th style="text-align:right;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
 congestion_surchage
 </th>
-<th style="text-align:right;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
 tip_amount
 </th>
-<th style="text-align:right;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
 tolls_amount
 </th>
-<th style="text-align:right;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
 total_amount
 </th>
-<th style="text-align:right;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
 commission
 </th>
-<th style="text-align:right;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
 net_amount
 </th>
-<th style="text-align:right;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
 pickup_longitude
 </th>
-<th style="text-align:right;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
 pickup_latitude
 </th>
-<th style="text-align:left;">
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
 pickup_location_name
 </th>
-<th style="text-align:right;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
 dropoff_longitude
 </th>
-<th style="text-align:right;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
 dropoff_latitude
 </th>
-<th style="text-align:left;">
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
 dropoff_location_name
 </th>
-<th style="text-align:left;">
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
 trip_request_num
 </th>
-<th style="text-align:left;">
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
 shared_trip_id
 </th>
-<th style="text-align:right;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
 DateTimeID
 </th>
-<th style="text-align:right;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
 PULocationID
 </th>
-<th style="text-align:right;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
 DOLocationID
 </th>
-<th style="text-align:right;">
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
 VendorID
 </th>
 </tr>
@@ -1839,33 +3575,39 @@ NA
 </tr>
 </tbody>
 </table>
+</div>
 <p>Here are the results of comparing the values of each shared column:</p>
 <ol style="list-style-type: decimal">
 <li>Medallion: Creating a list of all unqiue medallions in both datasets and comparing.</li>
 </ol>
 <pre><code>## character(0)</code></pre>
-<p>The resulting list is empty, meaning all medallions in the yellows data with AAR_request as NULL are in the ehail data.</p>
+<p>The resulting list is empty, meaning all medallions in the yellows TPEP table when AAR_request is NULL are in the ehail data.</p>
 <ol start="2" style="list-style-type: decimal">
 <li>Trip pickup datetime:</li>
 </ol>
 <pre><code>## numeric(0)</code></pre>
+<p>The resulting list is empty, meaning all trip pickup datetimes in the yellows TPEP table when AAR_request is NULL are in the ehail data.</p>
 <ol start="3" style="list-style-type: decimal">
 <li>Trip distance:</li>
 </ol>
 <pre><code>## numeric(0)</code></pre>
+<p>The resulting list is empty, meaning all observations for trip distance in the yellows TPEP table when AAR_request is NULL are in the ehail data.</p>
 <ol start="4" style="list-style-type: decimal">
 <li>Total Amount:</li>
 </ol>
 <pre><code>## numeric(0)</code></pre>
+<p>The resulting list is empty, meaning all observations for total amount in the yellows TPEP table when AAR_request is NULL are in the ehail data.</p>
 <ol start="5" style="list-style-type: decimal">
 <li>Pickup Location ID:</li>
 </ol>
 <pre><code>## integer(0)</code></pre>
+<p>The resulting list is empty, meaning all Pickup Location IDs in the yellows TPEP table when AAR_request is NULL are in the ehail data.</p>
 <ol start="6" style="list-style-type: decimal">
 <li>Pickup Location Name:</li>
 </ol>
 <pre><code>## character(0)</code></pre>
-<p>Based on these results, we can conclude that using the TPEP trip data table where the column AAR_Request is NULL outputs the same trips and data as pulling directly from the EHAIL table. To reduce redundancy and the need for more server space, we could feasibly rely only on the TPEP table to gather any AAR trip data.</p>
+<p>The resulting list is empty, meaning all Pickup Location Names in the yellows TPEP table when AAR_request is NULL are in the ehail data.</p>
+<p>Based on these results, we can conclude that using the Yellows TPEP data table where the column AAR_Request is NULL outputs the same trips and data as pulling directly from the EHAIL FF table. To reduce redundancy and the need for more server space, we could feasibly rely on only the Yellows TPEP table to gather any AAR trip data.</p>
 </div>
 
 
